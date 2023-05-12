@@ -133,7 +133,7 @@ class ZBeacon(object):
                 else:
                     self.udpsock.bind(("", self.port_nbr))
 
-                logger.debug("Set up a broadcast beacon to {0}:{1}".format(self.broadcast_address, self.port_nbr))
+                logger.info("Set up a broadcast beacon to {0}:{1}".format(self.broadcast_address, self.port_nbr))
         except socket.error:
             logger.exception("Initializing of {0} raised an exception".format(self.__class__.__name__))
 
@@ -179,10 +179,12 @@ class ZBeacon(object):
                     logger.debug("Interface {0} is a link-local device.".format(name))
                     continue
 
-                self.address = interface.ip
-                self.network_address = interface.network.network_address
-                self.broadcast_address = interface.network.broadcast_address
-                self.interface_name = name
+
+                if name == "tinc.zyremesh":
+                    self.address = interface.ip
+                    self.network_address = interface.network.network_address
+                    self.broadcast_address = interface.network.broadcast_address
+                    self.interface_name = name
 
             if self.address:
                 break
