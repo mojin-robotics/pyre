@@ -180,7 +180,7 @@ class ZBeacon(object):
                     continue
 
 
-                if name == "tinc.zyremesh":
+                if "zyremesh" in name:
                     self.address = interface.ip
                     self.network_address = interface.network.network_address
                     self.broadcast_address = interface.network.broadcast_address
@@ -197,10 +197,10 @@ class ZBeacon(object):
             self.interface_name = 'loopback'
             self.address = u('127.0.0.1')
 
-        logger.debug("Address: {0}".format(self.address))
-        logger.debug("Network: {0}".format(self.network_address))
-        logger.debug("Broadcast: {0}".format(self.broadcast_address))
-        logger.debug("Interface name: {0}".format(self.interface_name))
+        logger.info("Address: {0}".format(self.address))
+        logger.info("Network: {0}".format(self.network_address))
+        logger.info("Broadcast: {0}".format(self.broadcast_address))
+        logger.info("Interface name: {0}".format(self.interface_name))
 
     def configure(self, port_nbr):
         self.port_nbr = port_nbr
