@@ -27,6 +27,8 @@
         sequence      number 2
 """
 
+# pylint: disable=no-member
+
 import struct
 import uuid
 import zmq

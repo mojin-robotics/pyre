@@ -1,3 +1,5 @@
+# pylint: disable=no-member
+
 import logging
 
 logger = logging.getLogger(__name__)

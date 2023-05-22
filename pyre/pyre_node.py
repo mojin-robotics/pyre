@@ -1,3 +1,5 @@
+# pylint: disable=no-member
+
 import zmq
 import uuid
 import logging
@@ -10,7 +12,6 @@ from .zbeacon import ZBeacon
 from .zre_msg import ZreMsg
 from .pyre_peer import PyrePeer
 from .pyre_group import PyreGroup
-
 
 BEACON_VERSION = 1
 ZRE_DISCOVERY_PORT = 5670

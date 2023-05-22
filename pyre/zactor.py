@@ -1,16 +1,16 @@
 # =========================================================================
 # zactor - simple actor framework
-# 
+#
 # Copyright (c) the Contributors as noted in the AUTHORS file.
 # This file is part of CZMQ, the high-level C binding for 0MQ:
 # http://czmq.zeromq.org.
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # =========================================================================
-# 
-# 
+#
+#
 # The zactor class provides a simple actor framework. It replaces the
 # zthread class, which had a complex API that did not fit the CLASS
 # standard. A CZMQ actor is implemented as a thread plus a PAIR-PAIR
@@ -18,10 +18,12 @@
 # caller can be sure all resources are created, and destroyed, when these
 # calls complete. (This solves a major problem with zthread, that a caller
 # could not be sure when a child thread had finished.)
-# 
+#
 # A zactor_t instance acts like a zsock_t and you can pass it to any CZMQ
 # method that would take a zsock_t argument, including methods in zframe,
 # zmsg, zstr, zpoller, and zloop.
+
+# pylint: disable=no-member
 
 import zmq
 import threading
@@ -32,7 +34,7 @@ from . import zhelper
 logger = logging.getLogger(__name__)
 
 class ZActor(object):
-    
+
     ZACTOR_TAG = 0x0005cafe
 
     def __init__(self, ctx, actor, *args, **kwargs):

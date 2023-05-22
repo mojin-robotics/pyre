@@ -1,3 +1,5 @@
+# pylint: disable=no-member
+
 import binascii
 import itertools
 import os
@@ -11,7 +13,6 @@ try:
     u = unicode
 except NameError:
     u = str
-
 
 # --------------------------------------------------------------------------
 # Create a pipe, which consists of two PAIR sockets connected over inproc.
@@ -77,7 +78,7 @@ from ctypes import CDLL, Structure, Union
 
 from sys import platform
 if platform.startswith("win") and sys.version.startswith("2"):
-    import win_inet_pton
+    import win_inet_pton # pylint: disable=import-error
 from socket import AF_INET, AF_INET6, inet_ntop
 try:
     from socket import AF_PACKET
@@ -253,7 +254,7 @@ def get_ifaddrs():
 
         if ifa.ifa_addr:
             sa = sockaddr.from_address(ifa.ifa_addr)
-        
+
             data = {}
 
             if sa.sa_family == AF_INET:
@@ -343,13 +344,13 @@ def get_win_ifaddrs():
     import ctypes.wintypes
     from ctypes.wintypes import DWORD, WCHAR, BYTE, BOOL
     from socket import AF_INET
-    
+
     # from iptypes.h
     MAX_ADAPTER_ADDRESS_LENGTH = 8
     MAX_DHCPV6_DUID_LENGTH = 130
 
     GAA_FLAG_INCLUDE_PREFIX = ctypes.c_ulong(0x0010)
-    
+
     class in_addr(Structure):
         _fields_ = [("byte", ctypes.c_ubyte * 4)]
 
@@ -427,7 +428,7 @@ def get_win_ifaddrs():
     class IP_ADAPTER_ADDRESSES(ctypes.Structure):
         pass
     LP_IP_ADAPTER_ADDRESSES = ctypes.POINTER(IP_ADAPTER_ADDRESSES)
-    
+
     # for now, just use void * for pointers to unused structures
     PIP_ADAPTER_ANYCAST_ADDRESS = ctypes.c_void_p
     PIP_ADAPTER_MULTICAST_ADDRESS = ctypes.c_void_p
@@ -491,7 +492,7 @@ def get_win_ifaddrs():
         Returns an iteratable list of adapters.
         param:
          - af: the address family to read on
-        """ 
+        """
         size = ctypes.c_ulong()
         AF_UNSPEC = 0
         flags = GAA_FLAG_INCLUDE_PREFIX
@@ -546,7 +547,7 @@ def get_win_ifaddrs():
         data['broadcast'] = "{0}".format(ip_if.network.broadcast_address)
         data['network'] = "{0}".format(ip_if.network.network_address)
 
-        name = i.description 
+        name = i.description
         #result[i.description] = { ad.family : d}
         iface = {}
         for interface in result:

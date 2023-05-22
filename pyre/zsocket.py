@@ -1,10 +1,10 @@
 # =========================================================================
 # zsocket - working with 0MQ sockets
-# 
+#
 # Copyright (c) the Contributors as noted in the AUTHORS file.
 # This file is part of CZMQ, the high-level C binding for 0MQ:
 # http://czmq.zeromq.org.
-# 
+#
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -12,6 +12,8 @@
 # The zsocket class provides helper functions for 0MQ sockets. It doesn't
 # wrap the 0MQ socket type, to avoid breaking all libzmq socket-related
 # calls.
+
+# pylint: disable=no-member
 
 import zmq
 import struct
@@ -42,7 +44,7 @@ class ZSocket(zmq.Socket):
     #  success/failure code (by convention, 0 means OK). Signals are encoded
     #  to be distinguishable from "normal" messages. Accepts a zock_t or a
     #  zactor_t argument, and returns 0 if successful, -1 if the signal could
-    #  not be sent. 
+    #  not be sent.
     # Send a signal over a socket. A signal is a zero-byte message.
     # Signals are used primarily between threads, over pipe sockets.
     # Returns -1 if there was an error sending the signal.

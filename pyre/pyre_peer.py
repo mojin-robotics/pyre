@@ -1,3 +1,5 @@
+# pylint: disable=no-member,method-hidden
+
 import time
 import zmq
 import logging

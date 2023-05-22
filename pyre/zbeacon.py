@@ -22,6 +22,8 @@
     the CZMQ v3 API (meaning, zsock).
 """
 
+# pylint: disable=no-member
+
 import logging
 import ipaddress
 import socket
@@ -271,20 +273,20 @@ class ZBeacon(object):
         try:
             self.udpsock.sendto(self.transmit, (str(self.broadcast_address),
                                                 self.port_nbr))
-            
+
         except OSError as e:
-            
+
             # network down, just wait, it could come back up again.
             # socket call errors 50 and 51 relate to the network being
-            # down or unreachable, the recommended action to take is to 
+            # down or unreachable, the recommended action to take is to
             # try again so we don't terminate in these cases.
             if e.errno in [ENETDOWN, ENETUNREACH]: pass
-            
+
             # all other cases, we'll terminate
             else:
                 logger.debug("Network seems gone, exiting zbeacon")
                 self.terminated = True
-                
+
         except socket.error:
             logger.debug("Network seems gone, exiting zbeacon")
             self.terminated = True
